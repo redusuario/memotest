@@ -45,7 +45,7 @@ function manejarEventos($tablero) {
     	if ($elemento.classList.contains('cuadro')) {
       		manejarClickCuadro($elemento);
     	}
-    	console.log($elemento);
+    	//console.log($elemento);
   	};
 
 
@@ -56,33 +56,62 @@ function manejarEventos($tablero) {
 
 function manejarClickCuadro($cuadroActual) {
 	
-	  mostrarCuadro($cuadroActual);
+	mostrarCuadro($cuadroActual);
 
-  	if ($primerCuadro === null) {
-    	$primerCuadro = $cuadroActual;
-  	} else {
+	if(comprobarSiEsCuadroResuelto($cuadroActual)){
+		return;
+	}else{
 
-    	if ($primerCuadro === $cuadroActual) {
-      		return;
-    	}
+	  	if ($primerCuadro === null) {
+	    	$primerCuadro = $cuadroActual;
+	  	} else {
 
-    	turnos++;
 
-    	if (cuadrosSonIguales($primerCuadro, $cuadroActual)) {
-      		//eliminarCuadro($primerCuadro);
-      		//eliminarCuadro($cuadroActual);
-      		cantidadCuadros = cantidadCuadros - 2;
-      		evaluarFinDeJuego(cantidadCuadros);
-      		console.log('cantida cuadros: '+cantidadCuadros);
-    	} else {
-      		ocultarCuadro($primerCuadro);
-      		ocultarCuadro($cuadroActual);
-    	}
-    	$primerCuadro = null;
-  	}
+	    	if ($primerCuadro === $cuadroActual) {
+	      		return;
+	    	}
 
+	    	turnos++;
+
+	    	if (cuadrosSonIguales($primerCuadro, $cuadroActual)) {
+	      		//eliminarCuadro($primerCuadro);
+	      		//eliminarCuadro($cuadroActual);
+
+	      		marcarCuadrosComoYaElegidos($primerCuadro, $cuadroActual);
+
+	      		cantidadCuadros = cantidadCuadros - 2;
+	      		evaluarFinDeJuego(cantidadCuadros);
+	      		console.log('cantida cuadros: '+cantidadCuadros);
+	    	} else {
+	      		ocultarCuadro($primerCuadro);
+	      		ocultarCuadro($cuadroActual);
+	    	}
+	    	$primerCuadro = null;
+	  	}
+	}
 
 }
+
+
+function comprobarSiEsCuadroResuelto($cuadroActual) {
+	if ($cuadroActual.classList.contains('completo')) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+function marcarCuadrosComoYaElegidos($primerCuadro, $cuadroActual) {
+	$primerCuadro.classList.add('completo');
+	$cuadroActual.classList.add('completo');
+	console.log($primerCuadro);
+	console.log($cuadroActual);
+	console.log($cuadros);
+}
+
+
+
 
 function evaluarFinDeJuego(cantidadCuadros) {
  	if (cantidadCuadros === 0) {
