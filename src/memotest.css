@@ -1,0 +1,49 @@
+.cuadro {
+    /* visibility no anda porque no tiene valores numéricos que se puedan incrementar o decrementar
+    visibility: hidden;
+    */
+    height: 80px;
+    opacity: 0;
+    transition: opacity ease 0.2s;
+    border: 1px solid black;
+    cursor: pointer;
+
+}
+
+.columna-juego{
+    border: 1px solid black;
+}
+
+
+/*#prueba{ 
+	height: 120px; 
+	background-color: gray; 
+}*/
+
+.rojo {
+    background-color: red;
+}
+
+.verde {
+    background-color: green;
+}
+
+.amarillo {
+    background-color: yellow;
+}
+
+.negro {
+    background-color: black;
+}
+
+.blanco {
+    background-color: white;
+}
+
+.azul {
+    background-color: blue;
+}
+
+.oculto{
+    display: none;
+}
